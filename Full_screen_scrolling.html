@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		
+		html,body{
+			transition: all 1s;
+		}
+	</style>
+</head>
+<style type="text/css">
+	*{ margin:0; padding:0; }
+</style>
+<body>
+	<img src="1 (1).jpg" />
+	<img src="1 (2).jpg" />
+	<img src="1 (3).jpg" />
+	<img src="1 (4).jpg" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		var screenH=document.documentElement.clientHeight;
+		var screenW=document.documentElement.clientWidth;
+
+		var iNow = 0;
+
+		var imgs=document.getElementsByTagName('img');
+
+		for(var i=0;i<imgs.length;i++){
+			imgs[i].style.height=screenH+'px';
+			imgs[i].style.width=screenW+'px';
+		}
+
+
+		// function Move(num2,time){
+		// 	var now = $(window).scrollTop();
+		// 	var value = num2 - now ;
+
+		// 	var timer,i;
+		// 	clearInterval(timer);
+		// 	timer = setInterval(function(){
+		// 		i++;
+		// 		$(window).scrollTop(now+i);
+
+		// 		if( i >= value ){
+		// 			clearInterval(timer);
+		// 		}
+		// 	},1000/60)
+
+		// }
+
+		//原生：
+		window.onmousewheel=function(e){
+
+			var flag = true;
+
+            if (e.wheelDelta) {
+                flag = e.wheelDelta > 0 ? true : false;
+            } else {
+                flag = e.detail < 0 ? true : false;
+            }
+
+
+            if (flag) {
+                //console.log(1)
+
+                iNow--;
+
+                if(iNow<0){
+                	iNow=0;
+                }
+            } else {
+            	//console.log(2)
+
+            	iNow++;
+
+            	if(iNow>imgs.length-1){
+                	iNow=imgs.length-1;
+                }
+            }
+            
+            var n = screenH * iNow;
+
+            //Move(n)
+			document.body.scrollTop = n;
+            
+            return false;
+		}
+
+		//jq:
+		// $(document).on("mousewheel DOMMouseScroll", function (e) {
+    
+  //   		var chromeIE = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1));
+  //   		var fireFox = (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));
+		//     var delta =  chromeIE || fireFox ;
+
+		//     if( iNow >= imgs.length-1 ) iNow = imgs.length-1;
+		//     if( iNow < 0 ) iNow = 0;
+
+		//     if (delta > 0) {
+		//         // 向上滚
+		//         console.log("wheelup");
+		//         iNow--;
+		//     } else if (delta < 0) {
+		//         // 向下滚
+		//         console.log("wheeldown");
+		//         iNow++;
+		//     }
+
+		//     var n = iNow * screenH;
+
+  //            $(this).scrollTop( n );
+
+  //           return false;
+		// });
+
+	</script>
+</body>
+</html>
